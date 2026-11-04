@@ -11,7 +11,7 @@ public class TheParallel {
 
     public TheParallel() {
         ParallelEntities.ENTITY_TYPES.register(
-                net.minecraftforge.eventbus.api.FMLJavaModLoadingContext.get().getModEventBus()
+                import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;.get().getModEventBus()
         );
     }
 }
