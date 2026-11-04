@@ -10,7 +10,7 @@ public class TheParallel {
 
     public TheParallel(FMLJavaModLoadingContext context) {
         ParallelEntities.ENTITY_TYPES.register(
-                context.getModEventBus()
+                context.getModBusGroup()
         );
     }
 }
