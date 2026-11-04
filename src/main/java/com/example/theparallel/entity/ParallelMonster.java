@@ -45,7 +45,7 @@ public class ParallelMonster extends Monster {
     @Override
     public void tick() {
         super.tick();
-        if (this.level().isClientSide) return;
+        if (this.level().isClientSide()) return;
         Player nearest = this.level().getNearestPlayer(this, 24.0);
         if (nearest != null && this.hasLineOfSight(nearest)) {
             stareTicks++;
