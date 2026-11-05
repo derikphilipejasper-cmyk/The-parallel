@@ -1,6 +1,3 @@
-// This is a minimal setup of a Forge mod workspace.
-// For complex examples (including AccessTransformers, Jar-in-Jar, and Mixin), see our examples repository.
-// https://github.com/MinecraftForge/MDKExamples
 
 plugins {
     id 'java'
@@ -12,51 +9,54 @@ plugins {
 version = '0.5.0'
 group = 'com.example.theparallel'
 
-// Mojang ships Java 25 to end users in 26.1+, so your mod should target Java 25.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-// Include generated resources
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
 
 minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
     runs {
         configureEach {
-            workingDir = layout.projectDirectory.dir('run')
+            workingDirectory project.file('run')
 
-            systemProperty 'eventbus.api.strictRuntimeChecks', 'true'
-            systemProperty 'forge.enabledGameTestNamespaces', 'theparallel'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                theparallel {
+                    source sourceSets.main
+                }
+            }
         }
 
-        register('client')
+        client {}
 
-        register('server') {
+        server {
             args '--nogui'
         }
 
-        register('gameTestServer')
+        gameTestServer {}
 
-        register('data') {
-            workingDir = layout.projectDirectory.dir('run-data')
-
-            args '--mod', 'theparallel', '--all', '--output', layout.projectDirectory.dir('src/generated/resources'), '--existing', layout.projectDirectory.dir('src/main/resources')
+        data {
+            workingDirectory project.file('run-data')
+            args '--mod', 'theparallel',
+                 '--all',
+                 '--output', file('src/generated/resources/'),
+                 '--existing', file('src/main/resources/')
         }
     }
 }
 
 repositories {
-    minecraft.mavenizer(it) // In Kotlin, it = this
-    maven fg.forgeMaven
-    maven fg.minecraftLibsMaven
     mavenCentral()
 }
 
 dependencies {
-    implementation minecraft.dependency('net.minecraftforge:forge:26.2-65.1.6')
-    annotationProcessor 'net.minecraftforge:eventbus-validator:7.0.5'
+    minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
 }
 
 tasks.withType(JavaCompile).configureEach {
-    // Use the UTF-8 charset for Java compilation
-    // This is done by default in Java 18+, but this ensures it no matter the Java or Gradle version
     options.encoding = 'UTF-8'
 }
