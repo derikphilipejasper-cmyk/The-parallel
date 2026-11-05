@@ -1,3 +1,4 @@
+
 package com.example.theparallel;
 
 import com.example.theparallel.entity.ParallelEntities;
@@ -6,11 +7,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(TheParallel.MOD_ID)
 public class TheParallel {
+
     public static final String MOD_ID = "theparallel";
 
-    public TheParallel(FMLJavaModLoadingContext context) {
+    public TheParallel() {
         ParallelEntities.ENTITY_TYPES.register(
-                context.getModBusGroup()
+                FMLJavaModLoadingContext.get().getModEventBus()
         );
     }
 }
