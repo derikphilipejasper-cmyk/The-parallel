@@ -13,7 +13,7 @@ version = '0.5.0'
 group = 'com.example.theparallel'
 
 // Mojang ships Java 25 to end users in 26.1+, so your mod should target Java 25.
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 // Include generated resources
 sourceSets.main.resources { srcDir 'src/generated/resources' }
