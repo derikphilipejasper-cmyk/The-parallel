@@ -15,9 +15,9 @@ import net.minecraft.world.level.Level;
 public class ParallelMonster extends Monster {
     public enum Kind { STALKER, TORMENTOR, VIRUS }
     private final Kind kind;
-    private int stareTicks;
 
-    public ParallelMonster(EntityType<? extends Monster> type, Level level, Kind kind) {
+    private int stareTicks;
+public ParallelMonster(EntityType<? extends ParallelMonster> type, Level level, Kind kind) {
         super(type, level);
         this.kind = kind;
         this.xpReward = 12;
